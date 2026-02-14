@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Moves Tracker</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5129/5129371.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* HONEYPOT: Visually hidden but accessible to bots */
+        .hidden-field { 
+            opacity: 0; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            height: 0; 
+            width: 0; 
+            z-index: -1; 
+        }
+        .cursor-pointer { cursor: pointer; }
+        .toggle-icon { font-size: 1.5rem; transition: color 0.2s; }
+    </style>
+</head>
+<body class="bg-rose-50 text-slate-700 font-sans">
+
+    <div class="max-w-3xl mx-auto py-10 px-4">
+        <h1 class="text-3xl font-light text-center mb-8 text-rose-500 tracking-wide">Dance Moves Tracker</h1>
+
+        <form id="sheetdb-form" method="POST">
+            
+            <div class="mb-6 bg-white p-4 rounded-xl shadow-sm border border-rose-100">
+                <label for="follower" class="block text-sm font-medium text-slate-500 mb-2 uppercase tracking-wider">Follower</label>
+                <input type="text" id="follower" name="follower" class="w-full px-4 py-2 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-200 text-slate-700 transition" placeholder="Name (optional)">
+            </div>
+
+            <div class="overflow-hidden rounded-xl shadow-sm border border-rose-100 bg-white">
+                <table class="w-full text-center border-collapse">
+                    <thead class="bg-rose-100 text-rose-600 uppercase text-xs tracking-wider">
+                        <tr>
+                            <th class="px-4 py-3 text-left font-semibold">Move</th>
+                            <th class="px-2 py-3 font-semibold">Face to Face</th>
+                            <th class="px-2 py-3 font-semibold">Extended F2F</th>
+                            <th class="px-2 py-3 font-semibold">Pretzel</th>
+                            <th class="px-2 py-3 font-semibold">Shadow</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        <!-- Body Roll -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Body Roll</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="body_roll_f2f"></i><input type="checkbox" name="body_roll_f2f" value="Yes" class="hidden" id="body_roll_f2f"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="body_roll_ext_f2f"></i><input type="checkbox" name="body_roll_ext_f2f" value="Yes" class="hidden" id="body_roll_ext_f2f"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="body_roll_pretzel"></i><input type="checkbox" name="body_roll_pretzel" value="Yes" class="hidden" id="body_roll_pretzel"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="body_roll_shadow"></i><input type="checkbox" name="body_roll_shadow" value="Yes" class="hidden" id="body_roll_shadow"></td>
+                        </tr>
+                        <!-- Folding Combre -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Folding Combre</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="folding_combre_f2f"></i><input type="checkbox" name="folding_combre_f2f" value="Yes" class="hidden" id="folding_combre_f2f"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="folding_combre_ext_f2f"></i><input type="checkbox" name="folding_combre_ext_f2f" value="Yes" class="hidden" id="folding_combre_ext_f2f"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="folding_combre_pretzel"></i><input type="checkbox" name="folding_combre_pretzel" value="Yes" class="hidden" id="folding_combre_pretzel"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                        </tr>
+                        <!-- Cascade -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Cascade</td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="cascade_ext_f2f"></i><input type="checkbox" name="cascade_ext_f2f" value="Yes" class="hidden" id="cascade_ext_f2f"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="cascade_pretzel"></i><input type="checkbox" name="cascade_pretzel" value="Yes" class="hidden" id="cascade_pretzel"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="cascade_shadow"></i><input type="checkbox" name="cascade_shadow" value="Yes" class="hidden" id="cascade_shadow"></td>
+                        </tr>
+                        <!-- Hip Rolls -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Hip Rolls</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="hip_rolls_f2f"></i><input type="checkbox" name="hip_rolls_f2f" value="Yes" class="hidden" id="hip_rolls_f2f"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="hip_rolls_shadow"></i><input type="checkbox" name="hip_rolls_shadow" value="Yes" class="hidden" id="hip_rolls_shadow"></td>
+                        </tr>
+                        <!-- Head Rolls -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Head Rolls</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="head_rolls_f2f"></i><input type="checkbox" name="head_rolls_f2f" value="Yes" class="hidden" id="head_rolls_f2f"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="head_rolls_pretzel"></i><input type="checkbox" name="head_rolls_pretzel" value="Yes" class="hidden" id="head_rolls_pretzel"></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="head_rolls_shadow"></i><input type="checkbox" name="head_rolls_shadow" value="Yes" class="hidden" id="head_rolls_shadow"></td>
+                        </tr>
+                        <!-- Carousels -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Carousels</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="carousels_f2f"></i><input type="checkbox" name="carousels_f2f" value="Yes" class="hidden" id="carousels_f2f"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="carousels_shadow"></i><input type="checkbox" name="carousels_shadow" value="Yes" class="hidden" id="carousels_shadow"></td>
+                        </tr>
+                        <!-- Tilted Cambre -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">Tilted Cambre</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="tilted_cambre_f2f"></i><input type="checkbox" name="tilted_cambre_f2f" value="Yes" class="hidden" id="tilted_cambre_f2f"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                        </tr>
+                        <!-- ext. Head Roll -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">ext. Head Roll</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="ext_head_roll_f2f"></i><input type="checkbox" name="ext_head_roll_f2f" value="Yes" class="hidden" id="ext_head_roll_f2f"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="ext_head_roll_shadow"></i><input type="checkbox" name="ext_head_roll_shadow" value="Yes" class="hidden" id="ext_head_roll_shadow"></td>
+                        </tr>
+                        <!-- ext. Head Roll Turn -->
+                        <tr>
+                            <td class="px-4 py-3 text-left font-medium text-slate-600">ext. Head Roll Turn</td>
+                            <td class="py-3"><i class="fa-solid fa-toggle-off text-slate-300 toggle-icon cursor-pointer hover:text-rose-300" data-input="ext_head_roll_turn_f2f"></i><input type="checkbox" name="ext_head_roll_turn_f2f" value="Yes" class="hidden" id="ext_head_roll_turn_f2f"></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                            <td class="py-3 bg-slate-50"><i class="fa-solid fa-xmark text-slate-100"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- HONEYPOT FIELD -->
+            <input type="text" name="honeypot" class="hidden-field" tabindex="-1" autocomplete="off">
+
+            <div class="mt-8">
+                <button type="submit" id="submit-btn" class="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-4 rounded-lg transition duration-300 shadow-md shadow-rose-200">Submit Moves</button>
+            </div>
+        </form>
+
+        <div id="status" class="text-center mt-4 font-medium"></div>
+    </div>
+
+    <script>
+        // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw8En_jpmdqoBCQOSZ6xT3P10JkW-5LQJpptM85JcWXTq89NttRA_REzsYwO0YBpiOX/exec';
+        
+        const form = document.forms['sheetdb-form'];
+        const status = document.getElementById('status');
+        const btn = document.getElementById('submit-btn');
+
+        // Handle Toggle Clicks
+        document.querySelectorAll('.toggle-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const inputId = this.getAttribute('data-input');
+                const checkbox = document.getElementById(inputId);
+                
+                // Toggle checkbox state
+                checkbox.checked = !checkbox.checked;
+
+                // Update Icon Visuals
+                if (checkbox.checked) {
+                    this.classList.remove('fa-toggle-off', 'text-slate-300');
+                    this.classList.add('fa-toggle-on', 'text-emerald-400');
+                } else {
+                    this.classList.remove('fa-toggle-on', 'text-emerald-400');
+                    this.classList.add('fa-toggle-off', 'text-slate-300');
+                }
+            });
+        });
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            status.innerText = "";
+            status.className = "text-center mt-4 font-medium";
+
+            // Create FormData object
+            let formData = new FormData(form);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    // Google Apps Script redirects, so we check if the fetch resolved
+                    status.innerText = "Message sent successfully!";
+                    status.classList.add('text-emerald-500');
+                    form.reset();
+                    
+                    // Reset all icons to off
+                    document.querySelectorAll('.toggle-icon').forEach(icon => {
+                        icon.classList.remove('fa-toggle-on', 'text-emerald-400');
+                        icon.classList.add('fa-toggle-off', 'text-slate-300');
+                    });
+
+                    btn.disabled = false;
+                    btn.innerText = "Submit Moves";
+                })
+                .catch(error => {
+                    status.innerText = "Error! Please try again later.";
+                    status.classList.add('text-rose-500');
+                    console.error('Error!', error.message);
+                    btn.disabled = false;
+                    btn.innerText = "Submit Moves";
+                });
+        });
+    </script>
+</body>
+</html>
